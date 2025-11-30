@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+    <script src="../js/particles.js"></script>
+
+    <div class="dashboard">
+        <aside class="sidebar">
+            <div class="logo">CONNEXTA</div>
+            <nav>
+                <a href="../html/dashboard-investidor.html" class="active">Dashboard</a>
+                <a href="feed-projetos.html">Descobrir</a>
+                <a href="#">Minhas Investidas</a>
+                <a href="#">Notificações <span class="badge">3</span></a>
+                <a href="configuracoes.html">Configurações</a>
+            </nav>
+            <div class="user-info">
+                <div class="avatar">J</div>
+                <div>
+                    <div class="name">João Silva</div>
+                    <div class="email">joao@exemplo.com</div>
+                </div>
+                <a href="../index.html" class="logout">Sair</a>
+            </div>
+        </aside>
+
+        <main class="main">
+            <header>
+                <h1>Dashboard</h1>
+                <p>Bem-vindo de volta! Aqui está o resumo dos seus investimentos</p>
+            </header>
+
+            <div class="cards">
+                <div class="card">
+                    <div class="card-title">Total Investido</div>
+                    <div class="card-value">R$ 87.400,00</div>
+                    <div class="card-change positive">+12,4% (R$ +9.650)</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">Valor Atual</div>
+                    <div class="card-value">R$ 112.300,00</div>
+                    <div class="card-change positive">+28,5% no total</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">Rentabilidade</div>
+                    <div class="card-value">+28,5%</div>
+                    <div class="card-change positive">Acima da média do mercado</div>
+                </div>
+            </div>
+
+            <section class="section">
+                <h2>Minhas Investidas</h2>
+                <div class="investments">
+                    <div class="investment-card">
+                        <div class="company">Nextron</div>
+                        <div class="amount">R$ 25.000 investidos</div>
+                        <div class="return">+42% → R$ 35.500</div>
+                        <div class="status active">Em captação</div>
+                    </div>
+                    <div class="investment-card">
+                        <div class="company">GreenTech</div>
+                        <div class="amount">R$ 40.000 investidos</div>
+                        <div class="return">+31% → R$ 52.400</div>
+                        <div class="status">Finalizada</div>
+                    </div>
+                    <div class="investment-card">
+                        <div class="company">AquaPure</div>
+                        <div class="amount">R$ 22.400 investidos</div>
+                        <div class="return">+5% → R$ 23.520</div>
+                        <div class="status active">Em captação</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../js/dashboard-investidor.js"></script>
+    <script src="../js/navigation-animation.js"></script>
+</body>
+</html>

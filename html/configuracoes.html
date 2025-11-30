@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexta - Configurações</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/configuracoes.css">
+</head>
+<body>
+    <script src="../js/particles.js"></script>
+
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">CONNEXTA</div>
+            <nav>
+                <a href="../html/dashboard-investidor.html">Dashboard</a>
+                <a href="../html/feed-projetos.html">Descobrir</a>
+                <a href="#">Minhas Investidas</a>
+                <a href="#">Notificações <span class="badge">3</span></a>
+                <a href="../html/configuracoes.html" class="active">Configurações</a>
+            </nav>
+            <div class="user-info">
+                <div class="avatar" id="avatarPreview">J</div>
+                <div>
+                    <div class="name">João Silva</div>
+                    <div class="email">joao@exemplo.com</div>
+                </div>
+                <a href="../index.html" class="logout">Sair</a>
+            </div>
+        </aside>
+
+        <!-- Main -->
+        <main class="main">
+            <header>
+                <h1>Configurações</h1>
+                <p>Gerencie sua conta e preferências</p>
+            </header>
+
+            <div class="settings-container">
+                <!-- Perfil -->
+                <section class="settings-section">
+                    <h2>Perfil</h2>
+                    <div class="profile-photo">
+                        <div class="photo-wrapper">
+                            <div class="avatar-large" id="avatarLarge">J</div>
+                            <label for="uploadPhoto" class="upload-btn">Alterar foto</label>
+                            <input type="file" id="uploadPhoto" accept="image/*" hidden>
+                        </div>
+                    </div>
+
+                    <form id="profileForm">
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label>Nome completo</label>
+                                <input type="text" name="name" value="João Silva" required>
+                            </div>
+                            <div class="input-group">
+                                <label>E-mail</label>
+                                <input type="email" name="email" value="joao@exemplo.com" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label>CPF</label>
+                                <input type="text" name="cpf" value="123.456.789-00" maxlength="14" disabled>
+                            </div>
+                            <div class="input-group">
+                                <label>Celular</label>
+                                <input type="text" name="phone" value="(11) 98765-4321" required>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn primary">Salvar alterações</button>
+                    </form>
+                </section>
+
+                <!-- Segurança -->
+                <section class="settings-section">
+                    <h2>Segurança</h2>
+                    <button class="btn outline" id="changePassword">Alterar senha</button>
+                    <button class="btn outline">Ativar 2FA</button>
+                </section>
+
+                <!-- Notificações -->
+                <section class="settings-section">
+                    <h2>Notificações</h2>
+                    <label class="toggle">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                        Novas oportunidades de investimento
+                    </label>
+                    <label class="toggle">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                        Atualizações das minhas investidas
+                    </label>
+                    <label class="toggle">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                        Newsletter semanal
+                    </label>
+                </section>
+
+                <!-- Conta -->
+                <section class="settings-section danger">
+                    <h2>Zona de perigo</h2>
+                    <button class="btn danger">Excluir minha conta</button>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/configuracoes.js"></script>
+    <script src="../js/navigation-animation.js"></script>
+</body>
+</html>

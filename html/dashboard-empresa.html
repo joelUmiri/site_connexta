@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexta - Minha Startup</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+    <script src="../js/particles.js"></script>
+
+    <div class="dashboard">
+        <aside class="sidebar">
+            <div class="logo">CONNEXTA</div>
+            <nav>
+                <a href="../html/dashboard-empresa.html" class="active">Painel Geral</a>
+                <a href="#">Captação</a>
+                <a href="#">Investidores</a>
+                <a href="#">Documentos</a>
+                <a href="#">Relatórios</a>
+            </nav>
+            <div class="user-info">
+                <div class="avatar">E</div>
+                <div>
+                    <div class="name">EcoPower</div>
+                    <div class="email">contato@ecopower.com</div>
+                </div>
+                <a href="../index.html" class="logout">Sair</a>
+            </div>
+        </aside>
+
+        <main class="main">
+            <header>
+                <h1>Bem-vinda, EcoPower!</h1>
+                <p>Acompanhe o progresso da sua rodada de investimento</p>
+            </header>
+
+            <div class="cards">
+                <div class="card">
+                    <div class="card-title">Meta da Rodada</div>
+                    <div class="card-value">R$ 2.500.000</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">Já Captado</div>
+                    <div class="card-value">R$ 1.940.000</div>
+                    <div class="progress">
+                        <div class="progress-bar" style="width:77.6%"></div>
+                    </div>
+                    <small>77,6% da meta alcançada</small>
+                </div>
+                <div class="card">
+                    <div class="card-title">Investidores</div>
+                    <div class="card-value">184</div>
+                    <div class="card-change positive">+23 esta semana</div>
+                </div>
+            </div>
+
+            <section class="section">
+                <h2>Últimos Investimentos</h2>
+                <div class="investments">
+                    <div class="investment-card">
+                        <div class="investor">Maria Oliveira</div>
+                        <div class="amount">R$ 150.000</div>
+                        <div class="date">Há 2 horas</div>
+                    </div>
+                    <div class="investment-card">
+                        <div class="investor">Carlos Santos</div>
+                        <div class="amount">R$ 80.000</div>
+                        <div class="date">Há 5 horas</div>
+                    </div>
+                    <div class="investment-card">
+                        <div class="investor">Ana Costa</div>
+                        <div class="amount">R$ 200.000</div>
+                        <div class="date">Ontem</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../js/dashboard-investidor.js"></script>
+    <script src="../js/navigation-animation.js"></script>
+</body>
+</html>

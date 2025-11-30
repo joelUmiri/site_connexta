@@ -1,4 +1,3 @@
-// js/particles.js – versão suave, elegante e sem fugir rápido demais
 document.addEventListener("DOMContentLoaded", () => {
     const canvas = document.createElement("canvas");
     const ctx = canvas.getContext("2d");
@@ -15,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let particles = [];
     const particleCount = 70;
     const maxDistance = 150;
-    let mouseX = -9999;  // fora da tela no início
+    let mouseX = -9999; 
     let mouseY = -9999;
 
     document.addEventListener("mousemove", (e) => {
@@ -42,26 +41,22 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         update() {
-            // Repulsão MUITO mais suave do mouse
             const dx = this.x - mouseX;
             const dy = this.y - mouseY;
             const distance = Math.hypot(dx, dy);
 
             if (distance < 180) {
-                const force = (180 - distance) / 180;           // 0 a 1
-                const push = force * 0.25;                             // ← força reduzida (era 0.8 antes)
+                const force = (180 - distance) / 180;           
+                const push = force * 0.25;                             
                 this.speedX += (dx / distance) * push;
                 this.speedY += (dy / distance) * push;
             }
 
-            // Volta suavemente à velocidade normal
             this.speedX += (this.baseSpeedX - this.speedX) * 0.02;
             this.speedY += (this.baseSpeedY - this.speedY) * 0.02;
 
             this.x += this.speedX;
             this.y += this.speedY;
-
-            // Bordas
             if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
             if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
         }

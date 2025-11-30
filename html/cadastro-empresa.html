@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexta - Cadastro Empresa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../css/cadastro.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="user-type">
+            <button class="type-btn" onclick="location.href='cadastro-investidor.html'">Investidor</button>
+            <button class="type-btn active" onclick="location.href='cadastro-empresa.html'">Empresa</button>
+        </div>
+
+        <h1 class="logo">CONNEXTA</h1>
+        <p class="subtitle">Cadastre sua startup para captar investimento</p>
+
+        <form id="companyForm" novalidate>
+            <div class="form-grid">
+                <input type="text" name="company_name" placeholder="Razão social" required>
+                <input type="text" name="trading_name" placeholder="Nome fantasia">
+
+                <input type="text" name="cnpj" placeholder="CNPJ" maxlength="18" required>
+                <input type="email" name="email" placeholder="E-mail corporativo" required>
+
+                <input type="text" name="phone" placeholder="Celular com DDD" maxlength="15" required>
+                <div></div>
+
+                <div class="divider-small full-width"><span>Representante legal</span></div>
+
+                <input type="text" name="responsible_name" placeholder="Nome completo do responsável" required>
+                <input type="text" name="responsible_cpf" placeholder="CPF do responsável" maxlength="14" required>
+
+                <input type="password" name="password" placeholder="Senha (mín. 8 caracteres)" minlength="8"
+                    class="full-width" required>
+                <input type="password" name="password_confirm" placeholder="Confirmar senha" class="full-width"
+                    required>
+
+                <div class="full-width">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="accept_terms" required>
+                        <span>Li e aceito os <a href="#" target="_blank">Termos de Uso</a> e <a href="#"
+                                target="_blank">Política de Privacidade</a></span>
+                    </label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn primary">Criar conta como Empresa</button>
+        </form>
+
+        <p class="login-link">Já tem conta? <a href="../index.html">Fazer login</a></p>
+    </div>
+
+    <script src="js/cadastro.js"></script>
+    <script src="js/particles.js"></script>
+</body>
+
+</html>

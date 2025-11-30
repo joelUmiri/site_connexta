@@ -1,4 +1,3 @@
-// Troca de tipo (Investidor / Empresa)
 document.querySelectorAll('.type-btn').forEach(btn => {
     btn.addEventListener('click', () => {
         document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
@@ -6,7 +5,6 @@ document.querySelectorAll('.type-btn').forEach(btn => {
     });
 });
 
-// Login
 document.getElementById('loginForm').addEventListener('submit', async e => {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(e.target));

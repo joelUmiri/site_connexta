@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexta - Cadastro Investidor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/cadastro.css">
+</head>
+<body>
+    <div class="container">
+        <div class="user-type">
+            <button class="type-btn active" onclick="location.href='cadastro-investidor.html'">Investidor</button>
+            <button class="type-btn" onclick="location.href='cadastro-empresa.html'">Empresa</button>
+        </div>
+
+        <h1 class="logo">CONNEXTA</h1>
+        <p class="subtitle">Crie sua conta como investidor</p>
+
+        <form id="investorForm" novalidate>
+            <div class="form-grid">
+                <input type="text" name="full_name" placeholder="Nome completo" required>
+                <input type="date" name="birth_date" required>
+
+                <input type="text" name="cpf" placeholder="CPF" maxlength="14" required>
+                <input type="email" name="email" placeholder="E-mail" required>
+
+                <input type="text" name="phone" placeholder="Celular com DDD" maxlength="15" required>
+                <div></div>
+
+                <input type="password" name="password" placeholder="Senha (mín. 8 caracteres)" minlength="8" class="full-width" required>
+                <input type="password" name="password_confirm" placeholder="Confirmar senha" class="full-width" required>
+
+                <div class="full-width">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="accept_terms" required>
+                        <span>Li e aceito os <a href="#" target="_blank">Termos de Uso</a> e <a href="#" target="_blank">Política de Privacidade</a></span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="accept_cvm" required>
+                        <span>Declaro estar ciente das regras da CVM</span>
+                    </label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn primary">Criar conta como Investidor</button>
+        </form>
+
+        <p class="login-link">Já tem conta? <a href="index.html">Fazer login</a></p>
+    </div>
+
+    <script src="js/cadastro.js"></script>
+    <script src="js/particles.js"></script>
+</body>
+</html>

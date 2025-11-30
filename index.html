@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexta - Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/cadastro.css">
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+    <div class="container">
+        <div class="user-type">
+            <button class="type-btn active" data-type="investor">Investidor</button>
+            <button class="type-btn" data-type="company">Empresa</button>
+        </div>
+
+        <h1 class="logo">CONNEXTA</h1>
+        <p class="subtitle">Acesse sua conta</p>
+
+        <form id="loginForm" novalidate>
+            <input type="email" name="email" placeholder="E-mail" required>
+            <input type="password" name="password" placeholder="Senha" required>
+            <button type="submit" class="btn primary">Entrar</button>
+        </form>
+
+        <p class="forgot-password"><a href="#">Esqueceu a senha?</a></p>
+
+        <p class="login-link">
+            Não tem uma conta? <br><br>
+            <a href="cadastro-investidor.html">Cadastre-se como Investidor</a> ou 
+            <a href="cadastro-empresa.html">como Empresa</a>
+        </p>
+
+        <div class="divider"><span>ou</span></div>
+
+        <button type="button" class="btn google">
+            <img src="assets/google-icon.svg" alt="Google">
+            Continuar com Google
+        </button>
+    </div>
+
+    <script src="js/login.js"></script>
+    <script src="js/particles.js"></script>
+</body>
+</html>

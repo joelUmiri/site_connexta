@@ -1,0 +1,56 @@
+.forgot-password { 
+    margin: 16px 0; 
+    font-size: 14px; 
+}
+.forgot-password a { 
+    color: #FF297D; 
+    text-decoration: none; 
+}
+.forgot-password a:hover { 
+    text-decoration: underline; 
+}
+
+.divider {
+    margin: 32px 0;
+    color: #666;
+    position: relative;
+    font-size: 15px;
+}
+.divider::before,
+.divider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 38%;
+    height: 1.5px;
+    background: #333;
+}
+.divider::before { left: 0; }
+.divider::after { right: 0; }
+
+.btn.google {
+    width: 100%;
+    padding: 16px;
+    background: transparent;
+    border: 2px solid #333;
+    border-radius: 12px;
+    color: #bbb;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all .3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+.btn.google:hover {
+    border-color: #FF297D;
+    color: white;
+    background: rgba(255, 41, 125, 0.12);
+}
+.btn.google img {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+}

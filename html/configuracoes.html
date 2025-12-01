@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexta - Configurações</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="../css/dashboard.css">
     <link rel="stylesheet" href="../css/configuracoes.css">
 </head>
+
 <body>
     <script src="../js/particles.js"></script>
 
     <div class="dashboard">
-        <!-- Sidebar -->
         <aside class="sidebar">
             <div class="logo">CONNEXTA</div>
             <nav>
                 <a href="../html/dashboard-investidor.html">Dashboard</a>
-                <a href="../html/feed-projetos.html">Descobrir</a>
-                <a href="#">Minhas Investidas</a>
-                <a href="#">Notificações <span class="badge">3</span></a>
+                <a href="../html/feed-projetos.html">Feed</a>
                 <a href="../html/configuracoes.html" class="active">Configurações</a>
             </nav>
             <div class="user-info">
@@ -32,7 +32,6 @@
             </div>
         </aside>
 
-        <!-- Main -->
         <main class="main">
             <header>
                 <h1>Configurações</h1>
@@ -40,7 +39,6 @@
             </header>
 
             <div class="settings-container">
-                <!-- Perfil -->
                 <section class="settings-section">
                     <h2>Perfil</h2>
                     <div class="profile-photo">
@@ -78,14 +76,12 @@
                     </form>
                 </section>
 
-                <!-- Segurança -->
                 <section class="settings-section">
                     <h2>Segurança</h2>
                     <button class="btn outline" id="changePassword">Alterar senha</button>
                     <button class="btn outline">Ativar 2FA</button>
                 </section>
 
-                <!-- Notificações -->
                 <section class="settings-section">
                     <h2>Notificações</h2>
                     <label class="toggle">
@@ -105,7 +101,6 @@
                     </label>
                 </section>
 
-                <!-- Conta -->
                 <section class="settings-section danger">
                     <h2>Zona de perigo</h2>
                     <button class="btn danger">Excluir minha conta</button>
@@ -115,6 +110,8 @@
     </div>
 
     <script src="../js/configuracoes.js"></script>
+    <script src="../js/avatar-persistente.js"></script>
     <script src="../js/navigation-animation.js"></script>
 </body>
+
 </html>

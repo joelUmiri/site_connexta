@@ -1,29 +1,29 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexta - Descobrir Projetos</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Connexta - Feed</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="../css/dashboard.css">
     <link rel="stylesheet" href="../css/feed.css">
 </head>
+
 <body>
     <script src="../js/particles.js"></script>
 
     <div class="dashboard">
-        <!-- Sidebar (reutilizado) -->
         <aside class="sidebar">
             <div class="logo">CONNEXTA</div>
             <nav>
                 <a href="../html/dashboard-investidor.html">Dashboard</a>
-                <a href="../html/feed-projetos.html" class="active">Descobrir</a>
-                <a href="#">Minhas Investidas</a>
-                <a href="#">Notificações <span class="badge">3</span></a>
-                <a href="configuracoes.html">Configurações</a>
+                <a href="../html/feed.html" class="active">Feed</a>
+                <a href="../html/configuracoes.html">Configurações</a>
             </nav>
             <div class="user-info">
-                <div class="avatar">J</div>
+                <div class="avatar" id="avatarPreview">J</div>
                 <div>
                     <div class="name">João Silva</div>
                     <div class="email">joao@exemplo.com</div>
@@ -32,14 +32,12 @@
             </div>
         </aside>
 
-        <!-- Conteúdo Principal -->
         <main class="main">
             <header>
-                <h1>Descobrir Projetos</h1>
+                <h1>Feed</h1>
                 <p>Invista nas melhores startups do Brasil</p>
             </header>
 
-            <!-- Filtros -->
             <div class="filters">
                 <button class="filter-btn active" data-sector="todos">Todos</button>
                 <button class="filter-btn" data-sector="saude">Saúde</button>
@@ -48,10 +46,8 @@
                 <button class="filter-btn" data-sector="sustentabilidade">Sustentabilidade</button>
             </div>
 
-            <!-- Grid de Projetos -->
             <div class="projects-grid">
-                <!-- Projeto 1 -->
-                <div class="project-card" data-sector="saude">
+                <div class="project-card" data-sector="saude" onclick="abrirProjeto(1)">
                     <div class="project-image" style="background:#FF297D"></div>
                     <div class="project-info">
                         <h3>MediFlow</h3>
@@ -70,13 +66,14 @@
                     </div>
                 </div>
 
-                <!-- Projeto 2 -->
-                <div class="project-card" data-sector="fintech">
+                <div class="project-card" data-sector="fintech" onclick="abrirProjeto(2)">
                     <div class="project-image" style="background:#34A853"></div>
                     <div class="project-info">
                         <h3>PixBank</h3>
                         <p>Banco digital para PMEs</p>
-                        <div class="progress"><div class="progress-bar" style="width:72%"></div></div>
+                        <div class="progress">
+                            <div class="progress-bar" style="width:72%"></div>
+                        </div>
                         <div class="project-stats">
                             <span>R$ 3.600.000 captados</span>
                             <span class="target">de R$ 5.000.000</span>
@@ -88,13 +85,14 @@
                     </div>
                 </div>
 
-                <!-- Projeto 3 -->
-                <div class="project-card" data-sector="sustentabilidade">
+                <div class="project-card" data-sector="sustentabilidade" onclick="abrirProjeto(3)">
                     <div class="project-image" style="background:#4285F4"></div>
                     <div class="project-info">
                         <h3>EcoPower</h3>
                         <p>Energia solar acessível</p>
-                        <div class="progress"><div class="progress-bar" style="width:94%"></div></div>
+                        <div class="progress">
+                            <div class="progress-bar" style="width:94%"></div>
+                        </div>
                         <div class="project-stats">
                             <span>R$ 2.350.000 captados</span>
                             <span class="target">de R$ 2.500.000</span>
@@ -107,13 +105,14 @@
                     </div>
                 </div>
 
-                <!-- Projeto 4 -->
-                <div class="project-card" data-sector="edu">
+                <div class="project-card" data-sector="edu" onclick="abrirProjeto(4)">
                     <div class="project-image" style="background:#FBBC05"></div>
                     <div class="project-info">
                         <h3>LearnPro</h3>
                         <p>Cursos online com mentoria</p>
-                        <div class="progress"><div class="progress-bar" style="width:45%"></div></div>
+                        <div class="progress">
+                            <div class="progress-bar" style="width:45%"></div>
+                        </div>
                         <div class="project-stats">
                             <span>R$ 900.000 captados</span>
                             <span class="target">de R$ 2.000.000</span>
@@ -129,6 +128,8 @@
     </div>
 
     <script src="../js/feed.js"></script>
+    <script src="../js/avatar-persistente.js"></script>
     <script src="../js/navigation-animation.js"></script>
 </body>
+
 </html>

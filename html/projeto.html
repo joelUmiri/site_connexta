@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexta - Projeto</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/projeto.css">
+</head>
+
+<body>
+    <script src="../js/particles.js"></script>
+
+    <div class="dashboard">
+        <aside class="sidebar">
+            <div class="logo">CONNEXTA</div>
+            <nav>
+                <a href="dashboard-investidor.html">Dashboard</a>
+                <a href="feed-projetos.html">Feed</a>
+                <a href="configuracoes.html">Configurações</a>
+            </nav>
+            <div class="user-info">
+                <div class="avatar" id="avatarPreview">J</div>
+                <div>
+                    <div class="name">João Silva</div>
+                    <div class="email">joao@exemplo.com</div>
+                </div>
+                <a href="../index.html" class="logout">Sair</a>
+            </div>
+        </aside>
+
+        <main class="main">
+            <div class="project-detail">
+                <div class="project-header">
+                    <div class="project-image-large"></div>
+                    <div class="project-info-main">
+                        <h1 id="nomeProjeto">Carregando...</h1>
+                        <p id="descricaoProjeto"></p>
+                        <div class="tags"><span class="tag" id="setorProjeto"></span></div>
+                    </div>
+                </div>
+
+                <div class="project-body">
+                    <div class="stats-grid">
+                        <div class="stat">
+                            <div class="label">Meta</div>
+                            <div class="value" id="metaProjeto">R$ 0</div>
+                        </div>
+                        <div class="stat">
+                            <div class="label">Captado</div>
+                            <div class="value" id="captadoProjeto">R$ 0</div>
+                        </div>
+                        <div class="stat">
+                            <div class="label">Investidores</div>
+                            <div class="value" id="investidoresProjeto">0</div>
+                        </div>
+                        <div class="stat">
+                            <div class="label">Progresso</div>
+                            <div class="progress-large">
+                                <div class="progress-bar-large" id="barraProgresso"></div>
+                            </div>
+                            <small id="percentualProgresso">0%</small>
+                        </div>
+                    </div>
+
+                    <div class="actions">
+                        <button class="btn primary large" id="btnInvestir">Investir Agora</button>
+                    </div>
+
+                    <div class="tabs">
+                        <button class="tab active" data-tab="sobre">Sobre</button>
+                        <button class="tab" data-tab="time">Time</button>
+                        <button class="tab" data-tab="documentos">Documentos</button>
+                    </div>
+
+                    <div class="tab-content active" id="sobre">
+                        <h2>Sobre o projeto</h2>
+                        <p id="sobreTexto">Carregando...</p>
+                    </div>
+                    <div class="tab-content" id="time">
+                        <h2>Equipe</h2>
+                        <p>Informações do time em breve.</p>
+                    </div>
+                    <div class="tab-content" id="documentos">
+                        <h2>Documentos</h2>
+                        <p>PDFs disponíveis após login completo.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-overlay" id="modalInvestir">
+                <div class="modal">
+                    <button class="modal-close" id="fecharModal">X</button>
+
+                    <h2>Investir em <span id="modalNomeProjeto"></span></h2>
+                    <p class="modal-subtitle">Defina o valor do seu investimento</p>
+
+                    <div class="invest-form">
+                        <div class="input-group">
+                            <label>Valor que deseja investir</label>
+                            <input type="text" id="valorInvestimento" placeholder="R$ 5.000,00" value="R$ 5.000,00">
+                        </div>
+
+                        <div class="simulador">
+                            <div class="simulador-item">
+                                <span>Valor mínimo permitido</span>
+                                <strong>R$ 5.000,00</strong>
+                            </div>
+                            <div class="simulador-item">
+                                <span>Participação estimada</span>
+                                <strong id="participacao">0,25%</strong>
+                            </div>
+                            <div class="simulador-item highlight">
+                                <span>Retorno projetado (5 anos)</span>
+                                <strong id="retorno">R$ 18.750,00</strong>
+                            </div>
+                        </div>
+
+                        <div class="termos">
+                            <label class="checkbox">
+                                <input type="checkbox" id="aceitoTermos" required>
+                                <span class="checkmark"></span>
+                                Li e aceito os <a href="#">termos do contrato</a> e <a href="#">riscos do
+                                    investimento</a>
+                            </label>
+                        </div>
+
+                        <div class="modal-actions">
+                            <button class="btn outline" id="cancelarInvestimento">Cancelar</button>
+                            <button class="btn primary large" id="confirmarInvestimento" disabled>
+                                Confirmar Investimento
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/projeto.js"></script>
+    <script src="../js/avatar-persistente.js"></script>
+    <script src="../js/navigation-animation.js"></script>
+</body>
+
+</html>

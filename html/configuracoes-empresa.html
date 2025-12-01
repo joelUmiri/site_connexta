@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexta - Configurações da Empresa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/configuracoes.css">
+</head>
+<body>
+    <script src="../js/particles.js"></script>
+
+    <div class="dashboard">
+        <aside class="sidebar">
+            <div class="logo">CONNEXTA</div>
+            <nav>
+                <a href="../html/dashboard-empresa.html">Dashboard</a>
+                <a href="captacao.html">Captação</a>
+                <a href="configuracoes-empresa.html" class="active">Configurações</a>
+            </nav>
+            <div class="user-info">
+                <div class="avatar" id="avatarPreview">E</div>
+                <div>
+                    <div class="name">EcoPower</div>
+                    <div class="email">contato@ecopower.com</div>
+                </div>
+                <a href="../index.html" class="logout">Sair</a>
+            </div>
+        </aside>
+
+        <main class="main">
+            <header>
+                <h1>Configurações da Empresa</h1>
+                <p>Gerencie perfil, segurança e preferências</p>
+            </header>
+
+            <div class="settings-container">
+
+                <section class="settings-section">
+                    <h2>Perfil da Empresa</h2>
+                    <div class="profile-photo">
+                        <div class="photo-wrapper">
+                            <div class="avatar-large" id="avatarLarge">E</div>
+                            <label for="uploadLogo" class="upload-btn">Alterar logo</label>
+                            <input type="file" id="uploadLogo" accept="image/*" hidden>
+                        </div>
+                    </div>
+
+                    <form id="empresaForm">
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label>Nome da Startup</label>
+                                <input type="text" value="EcoPower Energia Solar" required>
+                            </div>
+                            <div class="input-group">
+                                <label>CNPJ</label>
+                                <input type="text" value="12.345.678/0001-99" disabled>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label>E-mail de Contato</label>
+                                <input type="email" value="contato@ecopower.com">
+                            </div>
+                            <div class="input-group">
+                                <label>Site</label>
+                                <input type="url" value="https://ecopower.com.br">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label>Setor Principal</label>
+                                <select>
+                                    <option>Sustentabilidade</option>
+                                    <option>Fintech</option>
+                                    <option>Saúde</option>
+                                    <option>Educação</option>
+                                    <option>Outro</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label>Telefone / WhatsApp</label>
+                                <input type="text" value="(11) 98765-4321">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn primary">Salvar Alterações</button>
+                    </form>
+                </section>
+
+                <section class="settings-section">
+                    <h2>Segurança</h2>
+                    <button class="btn outline" id="changePassword">Alterar Senha</button>
+                    <button class="btn outline">Ativar Autenticação em 2 Etapas (2FA)</button>
+                    <button class="btn outline">Ver Dispositivos Conectados</button>
+                </section>
+
+                <section class="settings-section">
+                    <h2>Notificações</h2>
+                    <label class="toggle">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                        Novos pedidos de investimento
+                    </label>
+                    <label class="toggle">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                        Investimento aceito / pago
+                    </label>
+                    <label class="toggle">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                        Newsletter e atualizações da Connexta
+                    </label>
+                </section>
+
+                <section class="settings-section danger">
+                    <h2>Zona de Perigo</h2>
+                    <p>Estas ações são irreversíveis</p>
+                    <button class="btn danger">Excluir Permanentemente a Conta da Startup</button>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/configuracoes-empresa.js"></script>
+    <script src="../js/avatar-persistente.js"></script>
+    <script src="../js/navigation-animation.js"></script>
+</body>
+</html>

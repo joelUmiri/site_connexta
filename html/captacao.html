@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexta - Captação</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/configuracoes.css">
+</head>
+<body>
+    <script src="../js/particles.js"></script>
+
+    <div class="dashboard">
+        <aside class="sidebar">
+            <div class="logo">CONNEXTA</div>
+            <nav>
+                <a href="../html/dashboard-empresa.html">Dashboard</a>
+                <a href="../html/captacao.html" class="active">Captação</a>
+                <a href="../html/configuracoes-empresa.html">Configurações</a>
+            </nav>
+            <div class="user-info">
+                <div class="avatar" id="avatarPreview">E</div>
+                <div>
+                    <div class="name">EcoPower</div>
+                    <div class="email">contato@ecopower.com</div>
+                </div>
+                <a href="../index.html" class="logout">Sair</a>
+            </div>
+        </aside>
+
+        <main class="main">
+            <header>
+                <h1>Captação Ativa</h1>
+                <p>Configure sua rodada e gerencie documentos e dados bancários</p>
+            </header>
+
+            <div class="captacao-tabs">
+                <button class="tab active" data-tab="config">Configurar Rodada</button>
+                <button class="tab" data-tab="documentos">Documentos</button>
+                <button class="tab" data-tab="bancarios">Dados Bancários</button>
+            </div>
+
+            <div class="tab-content active" id="config">
+                <div class="settings-section">
+                    <h3>Configurações da Rodada</h3>
+                    <form id="captacaoForm">
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label>Meta da Rodada</label>
+                                <input type="text" value="R$ 2.500.000,00">
+                            </div>
+                            <div class="input-group">
+                                <label>Ticket Mínimo</label>
+                                <input type="text" value="R$ 5.000,00">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label>Data Limite</label>
+                                <input type="date" value="2025-06-30">
+                            </div>
+                            <div class="input-group">
+                                <label>Equity Oferecida</label>
+                                <input type="text" value="12%">
+                            </div>
+                        </div>
+                        <label class="toggle">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                            Rodada aberta para novos investidores
+                        </label>
+                        <button type="submit" class="btn primary" style="margin-top:24px">
+                            Salvar Configurações
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="tab-content" id="documentos">
+                <div class="settings-section">
+                    <h3>Documentos da Rodada</h3>
+                    <p>Os investidores verão esses arquivos na página do projeto</p>
+                    <div class="document-list">
+                        <div class="doc-item">
+                            <span>Pitch Deck 2025.pdf</span>
+                            <button class="btn small outline">Substituir</button>
+                        </div>
+                        <div class="doc-item">
+                            <span>Contrato de Mútuo Conversível.docx</span>
+                            <button class="btn small outline">Substituir</button>
+                        </div>
+                        <div class="doc-item">
+                            <span>Memorial de Incorporação.pdf</span>
+                            <button class="btn small outline">Substituir</button>
+                        </div>
+                        <div class="doc-item add">
+                            <button class="btn outline">+ Adicionar Documento</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="bancarios">
+                <div class="settings-section">
+                    <h3>Dados Bancários</h3>
+                    <p>Para recebimento dos investimentos</p>
+                    <form>
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label>Banco</label>
+                                <input type="text" value="Itaú Unibanco">
+                            </div>
+                            <div class="input-group">
+                                <label>Agência</label>
+                                <input type="text" value="0489">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label>Conta</label>
+                                <input type="text" value="27194-6">
+                            </div>
+                            <div class="input-group">
+                                <label>Tipo</label>
+                                <select><option>Conta Corrente PJ</option></select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn primary">Salvar Dados Bancários</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelectorAll('.captacao-tabs .tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    document.querySelectorAll('.captacao-tabs .tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                    tab.classList.add('active');
+                    document.getElementById(tab.dataset.tab).classList.add('active');
+                });
+            });
+        });
+    </script>
+
+    <script src="../js/avatar-persistente.js"></script>
+    <script src="../js/navigation-animation.js"></script>
+</body>
+</html>

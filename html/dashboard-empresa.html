@@ -14,14 +14,12 @@
         <aside class="sidebar">
             <div class="logo">CONNEXTA</div>
             <nav>
-                <a href="../html/dashboard-empresa.html" class="active">Painel Geral</a>
-                <a href="#">Captação</a>
-                <a href="#">Investidores</a>
-                <a href="#">Documentos</a>
-                <a href="#">Relatórios</a>
+                <a href="../html/dashboard-empresa.html" class="active">Dashboard</a>
+                <a href="captacao.html">Captação</a>
+                <a href="configuracoes-empresa.html">Configurações</a>
             </nav>
             <div class="user-info">
-                <div class="avatar">E</div>
+                <div class="avatar" id="avatarPreview">E</div>
                 <div>
                     <div class="name">EcoPower</div>
                     <div class="email">contato@ecopower.com</div>
@@ -56,6 +54,17 @@
                 </div>
             </div>
 
+            <section class="section" id="captacao">
+                <h2>Novos Pedidos de Investimento</h2>
+                <p>Acompanhe quem quer investir na sua startup</p>
+
+                <div class="captacao-lista" id="listaPedidos">
+                    <div class="pedido-vazio">
+                        <p>Aguardando primeiros investidores...</p>
+                    </div>
+                </div>
+            </section>
+
             <section class="section">
                 <h2>Últimos Investimentos</h2>
                 <div class="investments">
@@ -69,17 +78,13 @@
                         <div class="amount">R$ 80.000</div>
                         <div class="date">Há 5 horas</div>
                     </div>
-                    <div class="investment-card">
-                        <div class="investor">Ana Costa</div>
-                        <div class="amount">R$ 200.000</div>
-                        <div class="date">Ontem</div>
-                    </div>
                 </div>
             </section>
         </main>
     </div>
 
-    <script src="../js/dashboard-investidor.js"></script>
+    <script src="../js/dashboard-empresa.js"></script>
+    <script src="../js/avatar-persistente.js"></script>
     <script src="../js/navigation-animation.js"></script>
 </body>
 </html>

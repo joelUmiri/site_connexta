@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexta - Feed</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
+    <title>Connexta - Feed de Projetos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/dashboard.css">
     <link rel="stylesheet" href="../css/feed.css">
 </head>
-
 <body>
     <script src="../js/particles.js"></script>
 
@@ -34,7 +31,7 @@
 
         <main class="main">
             <header>
-                <h1>Feed</h1>
+                <h1>Feed de Projetos</h1>
                 <p>Invista nas melhores startups do Brasil</p>
             </header>
 
@@ -46,90 +43,75 @@
                 <button class="filter-btn" data-sector="sustentabilidade">Sustentabilidade</button>
             </div>
 
-            <div class="projects-grid">
-                <div class="project-card" data-sector="saude" onclick="abrirProjeto(1)">
-                    <div class="project-image" style="background:#FF297D"></div>
-                    <div class="project-info">
-                        <h3>MediFlow</h3>
-                        <p>Plataforma de telemedicina com IA</p>
-                        <div class="progress">
-                            <div class="progress-bar" style="width:89%"></div>
-                        </div>
-                        <div class="project-stats">
-                            <span>R$ 1.780.000 captados</span>
-                            <span class="target">de R$ 2.000.000</span>
-                        </div>
-                        <div class="project-footer">
-                            <span class="tag">Saúde</span>
-                            <span class="investors">127 investidores</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card" data-sector="fintech" onclick="abrirProjeto(2)">
-                    <div class="project-image" style="background:#34A853"></div>
-                    <div class="project-info">
-                        <h3>PixBank</h3>
-                        <p>Banco digital para PMEs</p>
-                        <div class="progress">
-                            <div class="progress-bar" style="width:72%"></div>
-                        </div>
-                        <div class="project-stats">
-                            <span>R$ 3.600.000 captados</span>
-                            <span class="target">de R$ 5.000.000</span>
-                        </div>
-                        <div class="project-footer">
-                            <span class="tag">Fintech</span>
-                            <span class="investors">289 investidores</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card" data-sector="sustentabilidade" onclick="abrirProjeto(3)">
-                    <div class="project-image" style="background:#4285F4"></div>
-                    <div class="project-info">
-                        <h3>EcoPower</h3>
-                        <p>Energia solar acessível</p>
-                        <div class="progress">
-                            <div class="progress-bar" style="width:94%"></div>
-                        </div>
-                        <div class="project-stats">
-                            <span>R$ 2.350.000 captados</span>
-                            <span class="target">de R$ 2.500.000</span>
-                        </div>
-                        <div class="project-footer">
-                            <span class="tag">Sustentabilidade</span>
-                            <span class="investors">312 investidores</span>
-                            <span class="hot">EM ALTA</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card" data-sector="edu" onclick="abrirProjeto(4)">
-                    <div class="project-image" style="background:#FBBC05"></div>
-                    <div class="project-info">
-                        <h3>LearnPro</h3>
-                        <p>Cursos online com mentoria</p>
-                        <div class="progress">
-                            <div class="progress-bar" style="width:45%"></div>
-                        </div>
-                        <div class="project-stats">
-                            <span>R$ 900.000 captados</span>
-                            <span class="target">de R$ 2.000.000</span>
-                        </div>
-                        <div class="project-footer">
-                            <span class="tag">Educação</span>
-                            <span class="investors">89 investidores</span>
-                        </div>
-                    </div>
-                </div>
+            <!-- CORREÇÃO AQUI: Adicionei id="projetos-container" -->
+            <div id="projetos-container" class="projects-grid">
+                <!-- Removi os cards estáticos truncados para não conflitar -->
+                <!-- O JS vai preencher aqui com cards do Firebase -->
+                <div class="loading-message">Carregando projetos...</div> <!-- Fallback enquanto carrega -->
             </div>
         </main>
     </div>
+
+    <!-- Script do Firebase (corrigido para compatibilidade com filtros) -->
+    <script type="module">
+    import { db } from '../js/firebase.js';
+    import { collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+    const container = document.getElementById('projetos-container');
+
+    async function carregarProjetos() {
+        console.log("Tentando carregar projetos da coleção 'projects'...");
+        
+        try {
+            const q = query(collection(db, "projects"), orderBy("nome"));
+            const snapshot = await getDocs(q);
+
+            console.log("Snapshot recebido! Quantidade de documentos:", snapshot.size);
+            console.log("Documentos:", snapshot.docs.map(doc => ({ id: doc.id, data: doc.data() })));
+
+            container.innerHTML = '';
+
+            if (snapshot.empty) {
+                container.innerHTML = '<div class="loading-message">Nenhum projeto encontrado (snapshot vazio).</div>';
+                return;
+            }
+
+            snapshot.forEach(doc => {
+                const p = doc.data();
+                const progresso = p.meta ? Math.round((p.captado / p.meta) * 100) : 0;
+
+                const card = `
+                    <div class="project-card" data-sector="${(p.categoria || '').toLowerCase()}">
+                        <div class="project-image" style="background: linear-gradient(135deg, #00c48c, #009966);"></div>
+                        <div class="project-info">
+                            <h3>${p.nome || 'Sem nome'}</h3>
+                            <p>${p.descricao || 'Sem descrição'}</p>
+                            <div class="tag">${p.categoria || 'Geral'}</div>
+                        </div>
+                        <div class="progress-bar"><div style="width: ${progresso}%"></div></div>
+                        <p class="valor">R$ ${Number(p.captado || 0).toLocaleString('pt-BR')} de R$ ${Number(p.meta || 0).toLocaleString('pt-BR')}</p>
+                        <button class="btn-investir" onclick="location.href='projeto.html?id=${doc.id}'">
+                            Ver Projeto
+                        </button>
+                    </div>
+                `;
+                container.innerHTML += card;
+            });
+
+            console.log("CARDS CARREGADOS COM SUCESSO!");
+
+        } catch (error) {
+            console.error("ERRO FIREBASE:", error);
+            container.innerHTML = `<div class="loading-message" style="color:#ff6b6b">Erro: ${error.message}</div>`;
+        }
+    }
+
+    // Força esperar o Firebase carregar
+    setTimeout(carregarProjetos, 1000);
+</script>
 
     <script src="../js/feed.js"></script>
     <script src="../js/avatar-persistente.js"></script>
     <script src="../js/navigation-animation.js"></script>
 </body>
-
 </html>

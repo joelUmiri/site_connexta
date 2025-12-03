@@ -1,88 +1,140 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const projetoId = localStorage.getItem('projetoAtual') || '1';
+// js/projeto.js – Versão FINAL com formatação CLEAN (50 mil · 1,23 mi · 2,45 bi)
 
-    const projetos = {
-        '1': { nome: "MediFlow", descricao: "Plataforma de telemedicina com IA...", setor: "Saúde", meta: "R$ 2.000.000", captado: "R$ 1.780.000", investidores: 127, progresso: 89, sobre: "A MediFlow nasceu com o objetivo...", imagem: "#FF297D", valorMinimo: 5000, retornoMultiplicador: 3.75 },
-        '2': { nome: "PixBank", descricao: "Banco digital completo...", setor: "Fintech", meta: "R$ 5.000.000", captado: "R$ 3.600.000", investidores: 289, progresso: 72, sobre: "O PixBank oferece conta PJ gratuita...", imagem: "#34A853", valorMinimo: 10000, retornoMultiplicador: 4.2 },
-        '3': { nome: "EcoPower", descricao: "Energia solar acessível...", setor: "Sustentabilidade", meta: "R$ 2.500.000", captado: "R$ 2.350.000", investidores: 312, progresso: 94, sobre: "Somos a maior plataforma de energia solar...", imagem: "#4285F4", valorMinimo: 5000, retornoMultiplicador: 5.1 },
-        '4': { nome: "LearnPro", descricao: "Cursos online com mentoria...", setor: "Educação", meta: "R$ 2.000.000", captado: "R$ 900.000", investidores: 89, progresso: 45, sobre: "LearnPro conecta alunos com mentores...", imagem: "#FBBC05", valorMinimo: 5000, retornoMultiplicador: 3.4 }
-    };
+import { db } from '../js/firebase.js';
+import { doc, getDoc, updateDoc, arrayUnion } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 
-    const p = projetos[projetoId] || projetos['1'];
+// === FUNÇÃO DE FORMATAÇÃO LIMPA (a que você pediu e aprovou) ===
+function formatar(valor) {
+    if (isNaN(valor) || valor === null) return '0';
 
-    document.getElementById('nomeProjeto').textContent = p.nome;
-    document.getElementById('descricaoProjeto').textContent = p.descricao;
-    document.getElementById('setorProjeto').textContent = p.setor;
-    document.getElementById('metaProjeto').textContent = p.meta;
-    document.getElementById('captadoProjeto').textContent = p.captado;
-    document.getElementById('investidoresProjeto').textContent = p.investidores;
-    document.getElementById('barraProgresso').style.width = p.progresso + '%';
-    document.getElementById('sobreTexto').textContent = p.sobre;
-    document.querySelector('.project-image-large').style.background = p.imagem;
+    const abs = Math.abs(valor);
 
-    const modal = document.getElementById('modalInvestir');
-    const btnInvestir = document.getElementById('btnInvestir');
-    const inputValor = document.getElementById('valorInvestimento');
-    const checkboxTermos = document.getElementById('aceitoTermos');
-    const confirmarBtn = document.getElementById('confirmarInvestimento');
+    if (abs >= 1_000_000_000_000) {
+        return (valor / 1_000_000_000_000).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' tri';
+    }
+    if (abs >= 1_000_000_000) {
+        return (valor / 1_000_000_000).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' bi';
+    }
+    if (abs >= 1_000_000) {
+        return (valor / 1_000_000).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' mi';
+    }
+    if (abs >= 1_000) {
+        return (valor / 1_000).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' mil';
+    }
+    return valor.toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+}
 
-    btnInvestir.addEventListener('click', () => {
-        document.getElementById('modalNomeProjeto').textContent = p.nome;
-        inputValor.value = `R$ ${p.valorMinimo.toLocaleString('pt-BR')}`;
-        modal.style.display = 'flex';
-        atualizarSimulador();
-    });
+// === FUNÇÃO DO SIMULADOR ===
+function atualizarSimulador() {
+    const valorInvestido = Number(document.getElementById('valorInvestimento').dataset.raw || 0);
+    const multiplicador = Number(document.getElementById('retornoMultiplicador').textContent);
+    const retorno = valorInvestido * multiplicador;
 
-    document.getElementById('fecharModal').onclick = 
-    document.getElementById('cancelarInvestimento').onclick = () => {
-        modal.style.display = 'none';
-    };
+    document.getElementById('valorInvestido').textContent = formatar(valorInvestido);
+    document.getElementById('valorRetorno').textContent = formatar(retorno);
+}
 
-    modal.addEventListener('click', (e) => { if (e.target === modal) modal.style.display = 'none'; });
+// === CARREGA PROJETO AO ABRIR PÁGINA ===
+document.addEventListener("DOMContentLoaded", async () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const projetoId = urlParams.get('id');
 
-    inputValor.addEventListener('input', () => {
-        let v = inputValor.value.replace(/\D/g, '');
-        if (!v) v = '0';
-        inputValor.value = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(v / 100);
-        atualizarSimulador();
-    });
-
-    function atualizarSimulador() {
-        const valorStr = inputValor.value.replace(/\D/g, '') || '0';
-        const valor = parseInt(valorStr);
-        const metaTotal = parseFloat(p.meta.replace(/\D/g, ''));
-        const participacao = ((valor / metaTotal) * 100).toFixed(4);
-        const retorno = valor * p.retornoMultiplicador;
-
-        document.getElementById('participacao').textContent = participacao + '%';
-        document.getElementById('retorno').textContent = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(retorno);
-        confirmarBtn.disabled = (valor < p.valorMinimo || !checkboxTermos.checked);
+    if (!projetoId) {
+        document.getElementById('nomeProjeto').textContent = 'Erro: ID não encontrado';
+        return;
     }
 
-    checkboxTermos.addEventListener('change', atualizarSimulador);
+    try {
+        const projectRef = doc(db, "projects", projetoId);
+        const projectSnap = await getDoc(projectRef);
 
-    confirmarBtn.addEventListener('click', () => {
-        const valorFinal = inputValor.value;
-        const investidorNome = "João Silva";  
-        const investidorEmail = "joao@exemplo.com";
-        const dataAtual = new Date().toLocaleString('pt-BR');
+        if (!projectSnap.exists()) {
+            document.getElementById('nomeProjeto').textContent = 'Projeto não encontrado';
+            return;
+        }
 
-        const novoPedido = {
-            id: Date.now(),
-            projeto: p.nome,
-            investidor: investidorNome,
-            email: investidorEmail,
-            valor: valorFinal,
-            data: dataAtual,
-            status: "Pendente"
-        };
+        const p = projectSnap.data();
 
-        let pedidos = JSON.parse(localStorage.getItem('pedidosInvestimento') || '[]');
-        pedidos.unshift(novoPedido);
-        localStorage.setItem('pedidosInvestimento', JSON.stringify(pedidos));
+        // Preenche os dados na tela com a formatação limpa
+        document.getElementById('nomeProjeto').textContent = p.nome || 'Sem nome';
+        document.getElementById('descricaoProjeto').textContent = p.descricao || 'Sem descrição';
+        document.getElementById('setorProjeto').textContent = p.categoria || 'Geral';
+        document.getElementById('metaProjeto').textContent = formatar(p.meta || 0);
+        document.getElementById('captadoProjeto').textContent = formatar(p.captado || 0);
+        document.getElementById('investidoresProjeto').textContent = p.investidores || 0;
 
-        alert(`Investimento de ${valorFinal} em ${p.nome} enviado com sucesso!\n\nA startup receberá seu pedido agora.\nVocê será notificado por e-mail quando for aceito.`);
+        const porcentagem = p.meta ? Math.round((p.captado / p.meta) * 100) : 0;
+        document.getElementById('progressoProjeto').textContent = `${porcentagem}%`;
+        document.querySelector('.progress-fill').style.width = `${porcentagem}%`;
 
-        modal.style.display = 'none';
-    });
+        document.querySelector('.project-image-large').style.background = p.imagem || 'linear-gradient(135deg, #00c48c, #009966)';
+        document.getElementById('sobreProjeto').innerHTML = p.sobre || 'Descrição detalhada do projeto...';
+
+        // Configura simulador
+        const valorMinimo = p.valorMinimo || 5000;
+        const retornoMultiplicador = p.retornoMultiplicador || 3.75;
+
+        document.getElementById('valorMinimoInvestimento').textContent = formatar(valorMinimo);
+        document.getElementById('retornoMultiplicador').textContent = retornoMultiplicador.toFixed(2).replace('.', ',');
+
+        // Modal
+        const modal = document.getElementById('modalInvestimento');
+        const inputValor = document.getElementById('valorInvestimento');
+
+        // Formata input como moeda (mas guarda valor bruto no dataset)
+        inputValor.addEventListener('input', (e) => {
+            let valor = e.target.value.replace(/\D/g, '');
+            valor = (valor / 100).toFixed(2);
+            e.target.dataset.raw = valor.replace('.', '');
+
+            const formatado = Number(valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+            e.target.value = formatado;
+
+            atualizarSimulador();
+        });
+
+        // Abre modal
+        document.getElementById('btnInvestir').addEventListener('click', () => {
+            inputValor.value = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(valorMinimo);
+            inputValor.dataset.raw = valorMinimo;
+            atualizarSimulador();
+            modal.style.display = 'flex';
+        });
+
+        // Fecha modal
+        document.getElementById('cancelarInvestimento').addEventListener('click', () => modal.style.display = 'none');
+        window.addEventListener('click', (e) => { if (e.target === modal) modal.style.display = 'none'; });
+
+        // Confirmar investimento (salva no localStorage por enquanto)
+        document.getElementById('confirmarInvestimento').addEventListener('click', async () => {
+            if (!document.getElementById('aceitoTermos').checked) {
+                alert('Você precisa aceitar os termos');
+                return;
+            }
+
+            const valor = Number(inputValor.dataset.raw);
+            if (valor < valorMinimo) {
+                alert(`Valor mínimo é abaixo do mínimo (${formatar(valorMinimo)})`);
+                return;
+            }
+
+            // Salva no localStorage (pra dashboard da empresa ver depois)
+            const investimentos = JSON.parse(localStorage.getItem('investimentos_pendentes') || '[]');
+            investimentos.push({
+                projetoId,
+                projetoNome: p.nome,
+                valor,
+                data: new Date().toISOString(),
+                status: 'pendente'
+            });
+            localStorage.setItem('investimentos_pendentes', JSON.stringify(investimentos));
+
+            alert(`Investimento de ${formatar(valor)} confirmado! Aguarde aprovação.`);
+            modal.style.display = 'none';
+        });
+
+    } catch (error) {
+        console.error("Erro ao carregar projeto:", error);
+        document.getElementById('nomeProjeto').textContent = 'Erro ao carregar projeto';
+    }
 });

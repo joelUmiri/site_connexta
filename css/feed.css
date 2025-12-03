@@ -1,10 +1,12 @@
-/* Seu CSS original + adição para loading */
+/* feed.css - EXATO COMO NO SEU PRINT, SÓ PERFEITO SEM BOTÃO */
+
 .filters {
     display: flex;
     gap: 12px;
     flex-wrap: wrap;
     margin: 30px 0;
 }
+
 .filter-btn {
     padding: 10px 20px;
     background: #24272E;
@@ -15,6 +17,7 @@
     cursor: pointer;
     transition: all .3s;
 }
+
 .filter-btn:hover { background: #333; color: white; }
 .filter-btn.active {
     background: #FF297D;
@@ -27,73 +30,118 @@
     grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
     gap: 28px;
 }
+
 .project-card {
     background: #191B1F;
     border-radius: 20px;
     overflow: hidden;
     border: 1px solid #333;
     transition: all .4s ease;
-}
-.project-card:hover {
     cursor: pointer;
+}
+
+.project-card:hover {
     transform: translateY(-8px);
     box-shadow: 0 20px 40px rgba(0,0,0,.6);
 }
+
 .project-image {
     height: 180px;
-    background: linear-gradient(135deg, #FF297D, #e02070);
+    background: #667eea;                    /* ← cor padrão (roxo/azul) */
     background-size: cover;
     background-position: center;
+    transition: background 0.4s ease;       /* opcional: transição suave */
 }
+
 .project-info {
     padding: 24px;
 }
+
 .project-info h3 {
     font-size: 22px;
     margin-bottom: 8px;
+    color: white;
+    font-weight: 700;
 }
+
 .project-info p {
     color: #aaa;
     font-size: 14px;
     margin-bottom: 16px;
 }
-.project-stats {
-    display: flex;
-    justify-content: space-between;
-    font-size: 14px;
-    color: #aaa;
-    margin: 12px 0;
-}
-.target { opacity: 0.7; }
-.project-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 16px;
-    font-size: 13px;
-}
+
 .tag {
     background: rgba(255,41,125,.2);
     color: #FF297D;
     padding: 4px 12px;
     border-radius: 20px;
     font-weight: 600;
-}
-.hot {
-    background: #34A853;
-    color: white;
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-size: 11px;
-    font-weight: bold;
+    display: inline-block;
+    margin: 0 20px 20px;
 }
 
-/* Adição para loading (novo) */
+.progress {
+    width: 300px;
+    height: 10px;
+    background: #333;
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 16px 0 8px 0; /* Alinhamento perfeito com valores abaixo */
+}
+
+.progress-bar {
+    height: 100%;
+    background: #FF297D;
+    transition: width 1.2s ease;
+}
+
+.project-stats {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #aaa;
+    margin: 0;
+}
+
+.project-stats strong {
+    color: #FF297D; /* Captado em rosa */
+}
+
+.target {
+    opacity: 0.7;
+}
+
+.project-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+    font-size: 13px;
+    color: #aaa;
+}
+
+/* REMOVE O BOTÃO DESNECESSÁRIO DE UMA VEZ */
+.btn-investir, .btn {
+    display: none !important;
+}
+
+/* Loading */
 .loading-message {
-    grid-column: 1 / -1; /* Ocupa toda a grid */
+    grid-column: 1 / -1;
     text-align: center;
     padding: 60px 0;
     font-size: 18px;
     color: #888;
     font-style: italic;
+}
+
+.conteiner-progress {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 0 30px;
+}
+
+.valor {
+    justify-content: space-between;
 }

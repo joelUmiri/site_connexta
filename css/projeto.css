@@ -14,7 +14,7 @@
 .project-image-large {
     width: 420px;
     height: 280px;
-    background: #FF297D;
+    background: #191B1F;
     border-radius: 20px;
     background-size: cover;
     background-position: center;
@@ -58,7 +58,8 @@
     margin-top: 12px;
 }
 
-.progress-bar-large {
+.progress-bar-large,
+#progressoBar {
     height: 100%;
     background: #FF297D;
     width: 0%;
@@ -121,21 +122,27 @@
     display: block;
 }
 
-.modal-overlay {
+/* ==================== MODAL PERFEITO ==================== */
+#investModal {
+    display: none; /* começa fechado */
     position: fixed;
-    top: 0;
+    z-index: 1000;
     left: 0;
+    top: 0;
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.85);
     backdrop-filter: blur(10px);
-    display: none;
-    align-items: center;
+    -webkit-backdrop-filter: blur(10px);
     justify-content: center;
-    z-index: 1000;
+    align-items: center;
 }
 
-.modal {
+#investModal.active {
+    display: flex; /* abre com JS */
+}
+
+.modal-content {
     background: #191B1F;
     width: 90%;
     max-width: 560px;
@@ -143,30 +150,36 @@
     padding: 40px;
     position: relative;
     border: 1px solid #333;
-    animation: modalShow 0.5s ease-out;
+    box-shadow: 0 20px 60px rgba(255, 41, 125, 0.3);
+    animation: modalShow 0.4s ease-out;
 }
 
 @keyframes modalShow {
-    from {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
+    from { opacity: 0; transform: scale(0.9) translateY(-30px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
 }
 
-.modal-close {
+.close {
     position: absolute;
     top: 16px;
     right: 20px;
     background: none;
     border: none;
     color: #aaa;
-    font-size: 28px;
+    font-size: 32px;
     cursor: pointer;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s;
+}
+
+.close:hover {
+    background: rgba(255, 41, 125, 0.2);
+    color: #FF297D;
 }
 
 .modal h2 {
@@ -192,6 +205,7 @@
 
 .input-group input:focus {
     border-color: #FF297D;
+    outline: none;
 }
 
 .simulador {
@@ -232,7 +246,7 @@
     position: relative;
 }
 
-.checkbox input:checked+.checkmark {
+.checkbox input:checked + .checkmark {
     background: #FF297D;
     border-color: #FF297D;
 }
@@ -248,7 +262,7 @@
     display: none;
 }
 
-.checkbox input:checked+.checkmark::after {
+.checkbox input:checked + .checkmark::after {
     display: block;
 }
 

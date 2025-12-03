@@ -60,14 +60,14 @@
                         <div class="stat">
                             <div class="label">Progresso</div>
                             <div class="progress-large">
-                                <div class="progress-bar-large" id="barraProgresso"></div>
+                                <div class="progress-bar-large" id="progressoBar"></div>
                             </div>
                             <small id="percentualProgresso">0%</small>
                         </div>
                     </div>
 
                     <div class="actions">
-                        <button class="btn primary large" id="btnInvestir">Investir Agora</button>
+                        <button class="btn primary large" id="investirBtn">Investir Agora</button>
                     </div>
 
                     <div class="tabs">
@@ -90,9 +90,9 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-overlay" id="modalInvestir">
+            <div id="investModal" class="modal">
                 <div class="modal">
-                    <button class="modal-close" id="fecharModal">X</button>
+                    <span class="close">×</span>
 
                     <h2>Investir em <span id="modalNomeProjeto"></span></h2>
                     <p class="modal-subtitle">Defina o valor do seu investimento</p>
@@ -139,7 +139,7 @@
         </main>
     </div>
 
-    <script src="../js/projeto.js"></script>
+    <script type="module" src="../js/projeto.js"></script>
     <script src="../js/avatar-persistente.js"></script>
     <script src="../js/navigation-animation.js"></script>
 </body>

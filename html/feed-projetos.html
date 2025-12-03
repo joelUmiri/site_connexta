@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexta - Feed de Projetos</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="../css/dashboard.css">
     <link rel="stylesheet" href="../css/feed.css">
 </head>
+
 <body>
     <script src="../js/particles.js"></script>
 
@@ -54,64 +57,84 @@
 
     <!-- Script do Firebase (corrigido para compatibilidade com filtros) -->
     <script type="module">
-    import { db } from '../js/firebase.js';
-    import { collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+        import { db } from '../js/firebase.js';
+        import { collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 
-    const container = document.getElementById('projetos-container');
+        const container = document.getElementById('projetos-container');
 
-    async function carregarProjetos() {
-        console.log("Tentando carregar projetos da coleção 'projects'...");
-        
-        try {
-            const q = query(collection(db, "projects"), orderBy("nome"));
-            const snapshot = await getDocs(q);
+        // === COLOQUE ESTE CÓDIGO NO LUGAR DO SCRIPT QUE CARREGA OS PROJETOS ===
+        async function carregarProjetos() {
+            const container = document.getElementById('projetos-container');
+            if (!container) return;
 
-            console.log("Snapshot recebido! Quantidade de documentos:", snapshot.size);
-            console.log("Documentos:", snapshot.docs.map(doc => ({ id: doc.id, data: doc.data() })));
+            try {
+                const snapshot = await getDocs(collection(db, "projects"));
 
-            container.innerHTML = '';
+                container.innerHTML = ''; // limpa
 
-            if (snapshot.empty) {
-                container.innerHTML = '<div class="loading-message">Nenhum projeto encontrado (snapshot vazio).</div>';
-                return;
-            }
+                if (snapshot.empty) {
+                    container.innerHTML = '<p style="text-align:center; color:#aaa; grid-column:1/-1;">Nenhum projeto encontrado.</p>';
+                    return;
+                }
 
-            snapshot.forEach(doc => {
-                const p = doc.data();
-                const progresso = p.meta ? Math.round((p.captado / p.meta) * 100) : 0;
+                snapshot.forEach(doc => {
+                    const p = doc.data();
+                    const id = doc.id;
 
-                const card = `
-                    <div class="project-card" data-sector="${(p.categoria || '').toLowerCase()}">
-                        <div class="project-image" style="background: linear-gradient(135deg, #00c48c, #009966);"></div>
-                        <div class="project-info">
-                            <h3>${p.nome || 'Sem nome'}</h3>
-                            <p>${p.descricao || 'Sem descrição'}</p>
-                            <div class="tag">${p.categoria || 'Geral'}</div>
-                        </div>
-                        <div class="progress-bar"><div style="width: ${progresso}%"></div></div>
-                        <p class="valor">R$ ${Number(p.captado || 0).toLocaleString('pt-BR')} de R$ ${Number(p.meta || 0).toLocaleString('pt-BR')}</p>
-                        <button class="btn-investir" onclick="location.href='projeto.html?id=${doc.id}'">
-                            Ver Projeto
-                        </button>
+                    const progresso = p.meta ? Math.round((p.captado || 0) / p.meta * 100) : 0;
+
+                    const card = document.createElement('div');
+                    card.className = 'project-card';
+                    card.dataset.sector = (p.categoria || '').toLowerCase();
+
+                    card.innerHTML = `
+                <div class="project-image" style="background: linear-gradient(135deg, #667eea, #764ba2);"></div>
+                <div class="project-info">
+                    <h3>${p.nome || 'Sem nome'}</h3>
+                    <p>${p.descricao?.substring(0, 80) || 'Sem descrição'}...</p>
                     </div>
-                `;
-                container.innerHTML += card;
-            });
+                    <div class="conteiner-progress">
+                        <div class="progress">
+                            <div class="progress-bar" style="width: ${progresso}%"></div>
+                        </div>
+                            <p class="valor">R$ ${Number(p.captado || 0).toLocaleString('pt-BR')} de R$ ${Number(p.meta || 0).toLocaleString('pt-BR')}</p>
+                        </div>
+                        <div class="tag">${p.categoria || 'Geral'}</div>
+                        `;
 
-            console.log("CARDS CARREGADOS COM SUCESSO!");
+                    // AQUI ESTÁ A MÁGICA: clique no card inteiro abre o projeto
+                    card.addEventListener('click', () => {
+                        window.location.href = `projeto.html?id=${id}`;
+                    });
 
-        } catch (error) {
-            console.error("ERRO FIREBASE:", error);
-            container.innerHTML = `<div class="loading-message" style="color:#ff6b6b">Erro: ${error.message}</div>`;
+                    // Botão opcional (se quiser manter)
+                    const btn = document.createElement('button');
+                    btn.className = 'btn-investir';
+
+                    btn.addEventListener('click', (e) => {
+                        e.stopPropagation(); // evita clique duplo
+                        window.location.href = `projeto.html?id=${id}`;
+                    });
+                    card.appendChild(btn);
+
+                    container.appendChild(card);
+                });
+
+            } catch (error) {
+                console.error("Erro ao carregar projetos:", error);
+                container.innerHTML = `<p style="color:red; text-align:center;">Erro ao carregar projetos: ${error.message}</p>`;
+            }
         }
-    }
 
-    // Força esperar o Firebase carregar
-    setTimeout(carregarProjetos, 1000);
-</script>
+        // Chama quando carregar a página
+        document.addEventListener("DOMContentLoaded", () => {
+            carregarProjetos(carregarProjetos, 1000);
+        });
+    </script>
 
     <script src="../js/feed.js"></script>
     <script src="../js/avatar-persistente.js"></script>
     <script src="../js/navigation-animation.js"></script>
 </body>
+
 </html>

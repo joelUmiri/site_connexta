@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexta - Criar Projeto</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/projeto.css">
+    <link rel="stylesheet" href="../css/criar-projeto.css">
+</head>
+
+<body>
+    <script src="../js/particles.js"></script>
+
+    <div class="dashboard">
+        <aside class="sidebar">
+            <div class="logo">CONNEXTA</div>
+            <nav>
+                <a href="../html/dashboard-empresa.html">Dashboard</a>
+                <a href="criar-projeto.html" class="active">Criar Projeto</a>
+                <a href="captacao.html">Captação</a>
+                <a href="configuracoes-empresa.html">Configurações</a>
+            </nav>
+            <div class="user-info">
+                <div class="avatar" id="avatarPreview">E</div>
+                <div>
+                    <div class="name">EcoPower</div>
+                    <div class="email">ecopower@exemplo.com</div>
+                </div>
+                <a href="../index.html" class="logout">Sair</a>
+            </div>
+        </aside>
+
+        <main class="main">
+            <header>
+                <h1>Criar Novo Projeto</h1>
+                <p>Preencha os detalhes da sua startup</p>
+            </header>
+
+            <form id="criarProjetoForm">
+                <label for="nome">Nome do Projeto</label>
+                <input type="text" id="nome" required>
+
+                <label for="descricao">Descrição</label>
+                <textarea id="descricao" required></textarea>
+
+                <label for="categoria">Categoria</label>
+                <select id="categoria" required>
+                    <option value="">Selecione</option>
+                    <option value="Saúde">Saúde</option>
+                    <option value="Fintech">Fintech</option>
+                    <option value="Educação">Educação</option>
+                    <option value="Sustentabilidade">Sustentabilidade</option>
+                    <option value="Tecnologia">Tecnologia</option>
+                </select>
+
+                <label for="meta">Meta de Captação (R$)</label>
+                <input type="number" id="meta" required min="1000">
+
+                <label for="sobre">Sobre</label>
+                <textarea id="sobre" placeholder="Descreva seu projeto"></textarea>
+
+                <label for="time">Time</label>
+                <textarea id="time" placeholder="Apresente seu time"></textarea>
+
+                <label for="documentos">Documentos</label>
+                <textarea id="documentos" placeholder="Links ou PDFs do projeto"></textarea>
+
+
+
+                <label for="imagem">URL da Imagem</label>
+                <input type="url" id="imagem">
+
+                <button type="submit" class="btn primary">Criar Projeto</button>
+            </form>
+        </main>
+    </div>
+
+    <script src="../js/dashboard-empresa.js"></script>
+    <script src="../js/avatar-persistente.js"></script>
+    <script src="../js/navigation-animation.js"></script>
+
+    <!-- Firebase (mesmo do dashboard) -->
+    <script type="module">
+        import { db } from '../js/firebase.js';
+        import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+        document.getElementById("criarProjetoForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const projeto = {
+                nome: document.getElementById("nome").value,
+                descricao: document.getElementById("descricao").value,
+                categoria: document.getElementById("categoria").value,
+                meta: Number(document.getElementById("meta").value),
+                imagem: document.getElementById("imagem").value || null,
+                captado: 0,
+                investidores: 0,
+                destaque: false,
+                criadoEm: new Date(),
+                sobre: document.getElementById("sobre")?.value || "",
+                time: document.getElementById("time")?.value || "",
+                documentos: document.getElementById("documentos")?.value || ""
+            };
+
+
+
+            try {
+                await addDoc(collection(db, "projects"), projeto);
+                alert("Projeto criado com sucesso!");
+                window.location.href = "dashboard-empresa.html"; // redireciona
+            } catch (error) {
+                alert("Erro ao criar projeto: " + error.message);
+            }
+        });
+    </script>
+
+</body>
+
+</html>

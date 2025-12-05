@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             const cardHTML = `
                 <div class="project-card" data-sector="${projeto.categoria || 'Tecnologia'}" onclick="abrirProjeto('${projeto.id}')"
-                     style="opacity:0; transform:translateY(30px)">
+                    style="opacity:0; transform:translateY(30px)">
                     <div class="project-image" style="background: ${cor}; background-size:cover; background-position:center;">
                         ${projeto.imagem ? `<img src="${projeto.imagem}" style="width:100%; height:100%; object-fit:cover;">` : ''}
                     </div>

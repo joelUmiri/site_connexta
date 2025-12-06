@@ -1,4 +1,3 @@
-// js/projeto.js
 import { db } from './firebase.js';
 import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 
@@ -11,7 +10,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
     }
 
-    // Elementos do DOM
     const nomeProjeto = document.getElementById('nomeProjeto');
     const descricaoProjeto = document.getElementById('descricaoProjeto');
     const setorProjeto = document.getElementById('setorProjeto');
@@ -22,7 +20,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     const sobreProjeto = document.getElementById('sobreProjeto');
     const modalNomeProjeto = document.getElementById('modalNomeProjeto');
 
-    // Modal
     const investirBtn = document.getElementById('investirBtn');
     const modal = document.getElementById('investModal');
     const closeBtn = document.querySelector('.close');
@@ -42,7 +39,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         projeto = docSnap.data();
         projeto.id = docSnap.id;
 
-        // Preenche dados
         nomeProjeto.textContent = projeto.nome;
         descricaoProjeto.textContent = projeto.descricao || "Sem descrição disponível.";
         setorProjeto.textContent = projeto.categoria || "Geral";
@@ -52,20 +48,18 @@ document.addEventListener("DOMContentLoaded", async () => {
         modalNomeProjeto.textContent = projeto.nome;
         if (projeto.sobre) sobreProjeto.textContent = projeto.sobre;
 
-        // Progresso
         const progresso = projeto.meta ? Math.round((projeto.captado / projeto.meta) * 100) : 0;
         progressoBar.style.width = `${progresso}%`;
 
-        // Imagem
         const img = document.querySelector('.project-image-large');
         if (projeto.imagem) {
             img.style.backgroundImage = `url(${projeto.imagem})`;
             img.style.backgroundSize = 'cover';
             img.style.backgroundPosition = 'center';
-            img.classList.add('loaded');   // ← adiciona essa linha
+            img.classList.add('loaded');   
         } else {
             img.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
-            img.classList.add('loaded');   // ← e aqui também
+            img.classList.add('loaded');   
         }
 
     } catch (error) {
@@ -74,27 +68,23 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
     }
 
-    // === MODAL ===
     const valorMinimo = projeto.valorMinimo || 5000;
     const multiplicadorRetorno = projeto.retornoMultiplicador || 4.0;
 
     document.querySelectorAll('.simulador-item strong')[0].textContent =
         `R$ ${valorMinimo.toLocaleString('pt-BR')}`;
 
-    // Abre modal
     investirBtn.onclick = () => {
         modal.classList.add('active');
         inputValor.value = `R$ ${valorMinimo.toLocaleString('pt-BR')}`;
         atualizarSimulador();
     };
 
-    // Fecha modal
     const fecharModal = () => modal.classList.remove('active');
     closeBtn.onclick = fecharModal;
     cancelarBtn.onclick = fecharModal;
     window.onclick = (e) => { if (e.target === modal) fecharModal(); };
 
-    // Máscara de moeda
     inputValor.addEventListener('input', (e) => {
         let v = e.target.value.replace(/\D/g, '');
         v = (v / 100).toFixed(2).replace(".", ",");
@@ -117,7 +107,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     checkboxTermos.onchange = atualizarSimulador;
 
-    // Confirmar investimento
     confirmarBtn.onclick = () => {
         const valorFinal = inputValor.value;
 

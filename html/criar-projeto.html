@@ -20,8 +20,8 @@
             <div class="logo">CONNEXTA</div>
             <nav>
                 <a href="../html/dashboard-empresa.html">Dashboard</a>
-                <a href="criar-projeto.html" class="active">Criar Projeto</a>
                 <a href="captacao.html">Captação</a>
+                <a href="criar-projeto.html" class="active">Criar Projeto</a>
                 <a href="configuracoes-empresa.html">Configurações</a>
             </nav>
             <div class="user-info">
@@ -83,7 +83,6 @@
     <script src="../js/avatar-persistente.js"></script>
     <script src="../js/navigation-animation.js"></script>
 
-    <!-- Firebase (mesmo do dashboard) -->
     <script type="module">
         import { db } from '../js/firebase.js';
         import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
@@ -111,7 +110,7 @@
             try {
                 await addDoc(collection(db, "projects"), projeto);
                 alert("Projeto criado com sucesso!");
-                window.location.href = "dashboard-empresa.html"; // redireciona
+                window.location.href = "dashboard-empresa.html"; 
             } catch (error) {
                 alert("Erro ao criar projeto: " + error.message);
             }

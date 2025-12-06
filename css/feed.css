@@ -1,5 +1,3 @@
-/* feed.css - EXATO COMO NO SEU PRINT, SÓ PERFEITO SEM BOTÃO */
-
 .filters {
     display: flex;
     gap: 12px;
@@ -47,10 +45,10 @@
 
 .project-image {
     height: 180px;
-    background: #667eea;                    /* ← cor padrão (roxo/azul) */
+    background: #667eea;                  
     background-size: cover;
     background-position: center;
-    transition: background 0.4s ease;       /* opcional: transição suave */
+    transition: background 0.4s ease;      
 }
 
 .project-info {
@@ -86,7 +84,7 @@
     background: #333;
     border-radius: 5px;
     overflow: hidden;
-    margin: 16px 0 8px 0; /* Alinhamento perfeito com valores abaixo */
+    margin: 16px 0 8px 0; 
 }
 
 .progress-bar {
@@ -104,7 +102,7 @@
 }
 
 .project-stats strong {
-    color: #FF297D; /* Captado em rosa */
+    color: #FF297D; 
 }
 
 .target {
@@ -120,12 +118,10 @@
     color: #aaa;
 }
 
-/* REMOVE O BOTÃO DESNECESSÁRIO DE UMA VEZ */
 .btn-investir, .btn {
     display: none !important;
 }
 
-/* Loading */
 .loading-message {
     grid-column: 1 / -1;
     text-align: center;

@@ -46,23 +46,18 @@
                 <button class="filter-btn" data-sector="sustentabilidade">Sustentabilidade</button>
             </div>
 
-            <!-- CORREÇÃO AQUI: Adicionei id="projetos-container" -->
             <div id="projetos-container" class="projects-grid">
-                <!-- Removi os cards estáticos truncados para não conflitar -->
-                <!-- O JS vai preencher aqui com cards do Firebase -->
-                <div class="loading-message">Carregando projetos...</div> <!-- Fallback enquanto carrega -->
+                <div class="loading-message">Carregando projetos...</div> 
             </div>
         </main>
     </div>
 
-    <!-- Script do Firebase (corrigido para compatibilidade com filtros) -->
     <script type="module">
         import { db } from '../js/firebase.js';
         import { collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 
         const container = document.getElementById('projetos-container');
 
-        // === COLOQUE ESTE CÓDIGO NO LUGAR DO SCRIPT QUE CARREGA OS PROJETOS ===
         async function carregarProjetos() {
             const container = document.getElementById('projetos-container');
             if (!container) return;
@@ -102,17 +97,15 @@
                         <div class="tag">${p.categoria || 'Geral'}</div>
                         `;
 
-                    // AQUI ESTÁ A MÁGICA: clique no card inteiro abre o projeto
                     card.addEventListener('click', () => {
                         window.location.href = `projeto.html?id=${id}`;
                     });
 
-                    // Botão opcional (se quiser manter)
                     const btn = document.createElement('button');
                     btn.className = 'btn-investir';
 
                     btn.addEventListener('click', (e) => {
-                        e.stopPropagation(); // evita clique duplo
+                        e.stopPropagation(); 
                         window.location.href = `projeto.html?id=${id}`;
                     });
                     card.appendChild(btn);
@@ -126,7 +119,6 @@
             }
         }
 
-        // Chama quando carregar a página
         document.addEventListener("DOMContentLoaded", () => {
             carregarProjetos(carregarProjetos, 1000);
         });

@@ -122,9 +122,8 @@
     display: block;
 }
 
-/* ==================== MODAL PERFEITO ==================== */
 #investModal {
-    display: none; /* começa fechado */
+    display: none; 
     position: fixed;
     z-index: 1000;
     left: 0;
@@ -139,7 +138,7 @@
 }
 
 #investModal.active {
-    display: flex; /* abre com JS */
+    display: flex; 
 }
 
 .modal-content {

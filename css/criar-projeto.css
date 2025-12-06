@@ -1,6 +1,5 @@
-/* ====== Formulário Criar Projeto ====== */
 .main form {
-    background-color: #1f1f1f; /* Fundo escuro moderno */
+    background-color: #1f1f1f; 
     padding: 30px;
     border-radius: 16px;
     box-shadow: 0 8px 25px rgba(0,0,0,0.15);
@@ -46,7 +45,6 @@
     min-height: 100px;
 }
 
-/* Botão principal */
 .main form .btn.primary {
     padding: 16px;
     border-radius: 12px;
@@ -64,7 +62,6 @@
     transform: translateY(-2px);
 }
 
-/* Divider (opcional, se quiser separar seções) */
 .divider {
     margin: 32px 0;
     color: #aaa;
@@ -84,7 +81,6 @@
 .divider::before { left: 0; }
 .divider::after { right: 0; }
 
-/* Botão Google adaptado pro formulário (opcional) */
 .btn.google {
     width: 100%;
     padding: 16px;
@@ -112,7 +108,6 @@
     flex-shrink: 0;
 }
 
-/* Responsivo */
 @media (max-width: 768px) {
     .main form {
         margin: 20px;

@@ -8,12 +8,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         const snapshot = await firebase.firestore().collection("projects").get();
         const projetos = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 
-        projectsGrid.innerHTML = ""; // limpa
+        projectsGrid.innerHTML = ""; 
 
         projetos.forEach((projeto, i) => {
             const progresso = projeto.meta ? Math.min((projeto.captado || 0) / projeto.meta * 100, 100) : 0;
 
-            // CORES POR TIPO (aqui você controla tudo)
             const cores = {
                 "Saúde": "#FF297D",
                 "Fintech": "#34A853",
@@ -51,7 +50,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             projectsGrid.innerHTML += cardHTML;
         });
 
-        // Animação de entrada (sua animação original, só que agora com os cards novos)
         const cards = document.querySelectorAll('.project-card');
         cards.forEach((card, i) => {
             card.style.transition = "all 0.7s ease-out";
@@ -69,7 +67,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 });
 
-// FILTROS (mantive sua lógica original)
 document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
         document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
